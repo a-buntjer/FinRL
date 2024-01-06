@@ -8,7 +8,7 @@ from elegantrl.agents import AgentDDPG
 from elegantrl.agents import AgentPPO
 from elegantrl.agents import AgentSAC
 from elegantrl.agents import AgentTD3
-from elegantrl.train.config import Arguments
+from elegantrl.train.config import Config
 from elegantrl.train.run import init_agent
 from elegantrl.train.run import train_and_evaluate
 
@@ -60,7 +60,7 @@ class DRLAgent:
         agent = MODELS[model_name]
         if model_name not in MODELS:
             raise NotImplementedError("NotImplementedError")
-        model = Arguments(agent_class=agent, env=env)
+        model = Config(agent_class=agent, env=env)
         model.if_off_policy = model_name in OFF_POLICY_MODELS
         if model_kwargs is not None:
             try:
@@ -89,7 +89,7 @@ class DRLAgent:
             raise NotImplementedError("NotImplementedError")
         agent = MODELS[model_name]
         environment.env_num = 1
-        args = Arguments(agent_class=agent, env=environment)
+        args = Config(agent_class=agent, env=environment)
         args.cwd = cwd
         args.net_dim = net_dimension
         # load agent
